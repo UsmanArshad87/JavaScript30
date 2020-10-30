@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>JS Drum Kit</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+
+  <div class="container">
+
+    <div class="help">
+      <button onclick="autoPlay();">Play</button>
+      Hide Text
+      <label class="switch">
+        <input id="pianoHideTextCheckbox" type="checkbox">
+        <span class="slider round"></span>
+      </label>
+    </div>
+
+    <div class="piano-board">
+      <div class="piano">
+        <div class="piano-key" data-key="49">1</div>
+        <div class="piano-key" data-key="50">2</div>
+        <div class="piano-key" data-key="51">3</div>
+        <div class="piano-key" data-key="52">4</div>
+        <div class="piano-key" data-key="53">5</div>
+        <div class="piano-key" data-key="54">6</div>
+        <div class="piano-key" data-key="55">7</div>
+        <div class="piano-key" data-key="56">8</div>
+        <div class="piano-key" data-key="57">9</div>
+        <div class="piano-key" data-key="48">0</div>
+        <div class="piano-key" data-key="81">q</div>
+        <div class="piano-key" data-key="87">w</div>
+        <div class="piano-key" data-key="69">e</div>
+        <div class="piano-key" data-key="82">r</div>
+        <div class="piano-key" data-key="84">t</div>
+        <div class="piano-key" data-key="89">y</div>
+        <div class="piano-key" data-key="85">u</div>
+        <div class="piano-key" data-key="73">i</div>
+        <div class="piano-key" data-key="79">o</div>
+        <div class="piano-key" data-key="80">p</div>
+        <div class="piano-key" data-key="65">a</div>
+        <div class="piano-key" data-key="83">s</div>
+        <div class="piano-key" data-key="68">d</div>
+        <div class="piano-key" data-key="70">f</div>
+        <div class="piano-key" data-key="71">g</div>
+        <div class="piano-key" data-key="72">h</div>
+        <div class="piano-key" data-key="74">j</div>
+        <div class="piano-key" data-key="75">k</div>
+        <div class="piano-key" data-key="76">l</div>
+        <div class="piano-key" data-key="90">z</div>
+        <div class="piano-key" data-key="88">x</div>
+        <div class="piano-key" data-key="67">c</div>
+        <div class="piano-key" data-key="86">v</div>
+        <div class="piano-key" data-key="66">b</div>
+        <div class="piano-key" data-key="78">n</div>
+        <div class="piano-key" data-key="77">m</div>
+      </div>
+    </div>
+
+  </div>
+
+  <audio data-key="48" src="media/a48.mp3" class="0"></audio>
+  <audio data-key="49" src="media/a49.mp3" class="1"></audio>
+  <audio data-key="50" src="media/a50.mp3"></audio>
+  <audio data-key="51" src="media/a51.mp3"></audio>
+  <audio data-key="52" src="media/a52.mp3"></audio>
+  <audio data-key="53" src="media/a53.mp3"></audio>
+  <audio data-key="54" src="media/a54.mp3"></audio>
+  <audio data-key="55" src="media/a55.mp3"></audio>
+  <audio data-key="56" src="media/a56.mp3"></audio>
+  <audio data-key="57" src="media/a57.mp3"></audio>
+  <audio data-key="65" src="media/a65.mp3" class="a"></audio>
+  <audio data-key="66" src="media/a66.mp3" class="b"></audio>
+  <audio data-key="67" src="media/a67.mp3" class="c"></audio>
+  <audio data-key="68" src="media/a68.mp3"></audio>
+  <audio data-key="69" src="media/a69.mp3"></audio>
+  <audio data-key="70" src="media/a70.mp3"></audio>
+  <audio data-key="71" src="media/a71.mp3"></audio>
+  <audio data-key="72" src="media/a72.mp3"></audio>
+  <audio data-key="73" src="media/a73.mp3"></audio>
+  <audio data-key="74" src="media/a74.mp3"></audio>
+  <audio data-key="75" src="media/a75.mp3"></audio>
+  <audio data-key="76" src="media/a76.mp3"></audio>
+  <audio data-key="77" src="media/a77.mp3"></audio>
+  <audio data-key="78" src="media/a78.mp3"></audio>
+  <audio data-key="79" src="media/a79.mp3"></audio>
+  <audio data-key="80" src="media/a80.mp3"></audio>
+  <audio data-key="81" src="media/a81.mp3"></audio>
+  <audio data-key="82" src="media/a82.mp3"></audio>
+  <audio data-key="83" src="media/a83.mp3"></audio>
+  <audio data-key="84" src="media/a84.mp3"></audio>
+  <audio data-key="85" src="media/a85.mp3"></audio>
+  <audio data-key="86" src="media/a86.mp3"></audio>
+  <audio data-key="87" src="media/a87.mp3"></audio>
+  <audio data-key="88" src="media/a88.mp3"></audio>
+  <audio data-key="89" src="media/a89.mp3"></audio>
+  <audio data-key="90" src="media/a90.mp3"></audio>
+
+  <script>
+
+    function playSound(e) {
+      const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`)
+      const key = document.querySelector(`.piano-key[data-key="${e.keyCode}"]`)
+
+      if (!audio) return; // if not found any sound key then STOP here
+      audio.currentTime = 0;
+      audio.play();
+      key.classList.add('pressed');
+      setTimeout(function () {
+        key.classList.remove('pressed');
+      }, 100);
+    }
+
+    function pianoHideText() {
+      // Get the checkbox
+      const checkBox = document.querySelector("#pianoHideTextCheckbox");
+
+      // Get the Piano
+      const piano = document.querySelector(".piano");
+
+      // If the checkbox is checked, display the output text
+      if (checkBox.checked == true) {
+        piano.classList.add('hide-text');
+      } else {
+        piano.classList.remove('hide-text');
+      }
+    }
+
+    window.addEventListener('keydown', playSound);
+    document.querySelector('#pianoHideTextCheckbox').addEventListener('click', pianoHideText);
+
+
+
+    //   const key = document.querySelector(`.piano-key[data-key="${e.keyCode}"]`)
+    // setTimeout(function () {
+    //   console.log('a');
+    //   // console.log(document.querySelector('audio[data-key="65"]').play);
+    // }, 1000);
+
+    function autoPlay(e) {
+      document.querySelector('audio[data-key="55"').play();
+      setTimeout(function () {
+        document.querySelector('audio[data-key="56"').play();
+      }, 700)
+      setTimeout(function () {
+        document.querySelector('audio[data-key="57"').play();
+      }, 1500)
+
+      // asd.currentTime = 0;
+      // asd.play();
+      // console.log(asd);
+    }
+
+
+  </script>
+
+
+</body>
+
+</html>

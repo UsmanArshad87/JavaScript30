@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>JS Drum Kit</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  Number:
+  <input type="text" name="number" id="number" size="40">
+  <button onclick="playSound()">Sent</button>
+
+  <audio id="audio_0" data-key="48" src="media/a48.mp3" class="0"></audio>
+  <audio id="audio_1" data-key="49" src="media/a49.mp3" class="1"></audio>
+  <audio id="audio_2" data-key="50" src="media/a50.mp3"></audio>
+  <audio id="audio_3" data-key="51" src="media/a51.mp3"></audio>
+  <audio id="audio_4" data-key="52" src="media/a52.mp3"></audio>
+  <audio id="audio_5" data-key="53" src="media/a53.mp3"></audio>
+  <audio id="audio_6" data-key="54" src="media/a54.mp3"></audio>
+  <audio id="audio_7" data-key="55" src="media/a55.mp3"></audio>
+  <audio id="audio_8" data-key="56" src="media/a56.mp3"></audio>
+  <audio id="audio_9" data-key="57" src="media/a57.mp3"></audio>
+  <audio data-key="65" src="media/a65.mp3" class="a"></audio>
+  <audio data-key="66" src="media/a66.mp3" class="b"></audio>
+  <audio data-key="67" src="media/a67.mp3" class="c"></audio>
+  <audio data-key="68" src="media/a68.mp3"></audio>
+  <audio data-key="69" src="media/a69.mp3"></audio>
+  <audio data-key="70" src="media/a70.mp3"></audio>
+  <audio data-key="71" src="media/a71.mp3"></audio>
+  <audio data-key="72" src="media/a72.mp3"></audio>
+  <audio data-key="73" src="media/a73.mp3"></audio>
+  <audio data-key="74" src="media/a74.mp3"></audio>
+  <audio data-key="75" src="media/a75.mp3"></audio>
+  <audio data-key="76" src="media/a76.mp3"></audio>
+  <audio data-key="77" src="media/a77.mp3"></audio>
+  <audio data-key="78" src="media/a78.mp3"></audio>
+  <audio data-key="79" src="media/a79.mp3"></audio>
+  <audio data-key="80" src="media/a80.mp3"></audio>
+  <audio data-key="81" src="media/a81.mp3"></audio>
+  <audio data-key="82" src="media/a82.mp3"></audio>
+  <audio data-key="83" src="media/a83.mp3"></audio>
+  <audio data-key="84" src="media/a84.mp3"></audio>
+  <audio data-key="85" src="media/a85.mp3"></audio>
+  <audio data-key="86" src="media/a86.mp3"></audio>
+  <audio data-key="87" src="media/a87.mp3"></audio>
+  <audio data-key="88" src="media/a88.mp3"></audio>
+  <audio data-key="89" src="media/a89.mp3"></audio>
+  <audio data-key="90" src="media/a90.mp3"></audio>
+
+  <script>
+
+    // https://stackoverflow.com/questions/30598073/javascript-play-multiple-audio-in-loop
+    var audio = new Audio(), srcList = [], number;
+    for (var i = 0; i < 10; i++) srcList.push(i + '.mp3');     //Replace
+    function playSound() {
+      number = document.getElementById('number').value;
+      audLoop(0);
+    }
+
+    function audLoop(i) {
+      if (!number || i >= number.length || !srcList[number[i]]) return;
+      audio.src = srcList[number[i]];
+      audio.play();
+      i++;
+      if (srcList[number[i]]) {
+        audio.onended = setTimeout(audLoop.bind(null, i), 1000);   // for Delay
+      } else {
+        audio.onended = null;
+      }
+    }
+
+
+  </script>
+
+
+</body>
+
+</html>
