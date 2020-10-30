@@ -1,0 +1,123 @@
+*,
+*:after,
+*:before {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(90deg, rgba(136, 251, 255, 1) 0%, rgba(0, 173, 255, 1) 100%);
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.clock {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 2px solid black;
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.564);
+
+    &:after {
+        content: "";
+        width: 15px;
+        height: 15px;
+        background-color: black;
+        border-radius: 50%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+    }
+
+    &__hand {
+        --rotation: 0;
+        position: absolute;
+        left: 50%;
+        bottom: 50%;
+        transform: translateX(-50%) rotate(calc(var(--rotation) * 1deg));
+        transform-origin: bottom;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        transition: all 0.5s;
+
+        &-hour {
+            height: 70px;
+            width: 7px;
+            background-color: black;
+            // --rotation: 30deg;
+        }
+
+        &-minute {
+            height: 110px;
+            width: 4px;
+            background-color: rebeccapurple;
+            // --rotation: 60deg;
+        }
+
+        &-second {
+            height: 130px;
+            width: 1px;
+            background-color: red;
+            // --rotation: 90deg;
+        }
+    }
+}
+
+.number {
+    --rotate-number: 0;
+    // background-color: red;
+    position: absolute;
+    font-weight: 500;
+    font-size: 1.5rem;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transform: rotate(calc(var(--rotate-number) * 1deg));
+
+    &:nth-child(3n) {
+        font-size: 2.5rem;
+        color: brown;
+    }
+
+    &__1 {
+        --rotate-number: 30;
+    }
+    &__2 {
+        --rotate-number: 60;
+    }
+    &__3 {
+        --rotate-number: 90;
+    }
+    &__4 {
+        --rotate-number: 120;
+    }
+    &__5 {
+        --rotate-number: 150;
+    }
+    &__6 {
+        --rotate-number: 180;
+    }
+    &__7 {
+        --rotate-number: 210;
+    }
+    &__8 {
+        --rotate-number: 240;
+    }
+    &__9 {
+        --rotate-number: 270;
+    }
+    &__10 {
+        --rotate-number: 300;
+    }
+    &__11 {
+        --rotate-number: 330;
+    }
+
+}
